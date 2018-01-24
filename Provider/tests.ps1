@@ -1,9 +1,12 @@
+param(
+	[Parameter(Mandatory=$True)]$Configuration)
+
 $ErrorActionPreference = 'Stop'
 
 $baseDir = Resolve-Path .
 $testsBaseDir = "$baseDir\Provider\src\FirebirdSql.Data.FirebirdClient.Tests"
-$testsNETDir = "$testsBaseDir\bin\$env:CONFIGURATION\net452"
-$testsCOREDir = "$testsBaseDir\bin\$env:CONFIGURATION\netcoreapp2.0"
+$testsNETDir = "$testsBaseDir\bin\$Configuration\net452"
+$testsCOREDir = "$testsBaseDir\bin\$Configuration\netcoreapp2.0"
 
 mkdir C:\firebird | Out-Null
 cd C:\firebird
@@ -21,10 +24,10 @@ cd $testsNETDir
 nunit3-console FirebirdSql.Data.FirebirdClient.Tests.dll --framework=net-4.5 --result='dummy.xml;format=AppVeyor'
 
 cd $testsBaseDir
-dotnet test FirebirdSql.Data.FirebirdClient.Tests.csproj -c $env:CONFIGURATION -f netcoreapp2.0 --no-build --no-restore
+dotnet test FirebirdSql.Data.FirebirdClient.Tests.csproj -c $Configuration -f netcoreapp2.0 --no-build --no-restore
 
-cd "$baseDir\Provider\src\EntityFramework.Firebird.Tests\bin\$env:Configuration\net452"
+cd "$baseDir\Provider\src\EntityFramework.Firebird.Tests\bin\$Configuration\net452"
 nunit3-console EntityFramework.Firebird.Tests.dll --framework=net-4.5 --result='dummy.xml;format=AppVeyor'
 
 cd "$baseDir\Provider\src\FirebirdSql.EntityFrameworkCore.Firebird.Tests"
-dotnet test FirebirdSql.EntityFrameworkCore.Firebird.Tests.csproj -c $env:CONFIGURATION -f netcoreapp2.0 --no-build --no-restore
+dotnet test FirebirdSql.EntityFrameworkCore.Firebird.Tests.csproj -c $Configuration -f netcoreapp2.0 --no-build --no-restore
