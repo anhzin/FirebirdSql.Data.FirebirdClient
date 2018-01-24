@@ -27,4 +27,4 @@ build_script:
 after_build:
   - ps: gci "$baseDir\Provider\out" | % { Push-AppveyorArtifact $_.FullName -FileName $_.Name }
 test_script:
-  - ps: "& $baseDir\\Provider\\tests.ps1"
+  - ps: "& $baseDir\\Provider\\tests.ps1 -Configuration $env:CONFIGURATION"

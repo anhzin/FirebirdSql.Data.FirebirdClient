@@ -1,3 +1,5 @@
+$ErrorActionPreference = 'Stop'
+
 $baseDir = Resolve-Path .
 $testsBaseDir = "$baseDir\Provider\src\FirebirdSql.Data.FirebirdClient.Tests"
 $testsNETDir = "$testsBaseDir\bin\$env:CONFIGURATION\net452"
