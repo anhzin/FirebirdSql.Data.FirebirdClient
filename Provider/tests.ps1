@@ -8,8 +8,8 @@ $testsBaseDir = "$baseDir\Provider\src\FirebirdSql.Data.FirebirdClient.Tests"
 $testsNETDir = "$testsBaseDir\bin\$Configuration\net452"
 $testsCOREDir = "$testsBaseDir\bin\$Configuration\netcoreapp2.0"
 
-mkdir C:\firebird | Out-Null
-cd C:\firebird
+mkdir $env:tests_firebird_dir | Out-Null
+cd $env:tests_firebird_dir
 Start-FileDownload "$env:fb_download" | Out-Null
 7z x ($env:fb_download -replace '.+/([^/]+)\?dl=1','$1') | Out-Null
 cp -Recurse .\embedded\* $testsNETDir
